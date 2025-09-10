@@ -1,30 +1,31 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
+// Agrega estas rutas a tu server.js existente
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  next();
+// Generar guión con IA
+app.post('/generar-guion', (req, res) => {
+    const { tema, duracion, estilo } = req.body;
+    
+    // Aquí integrarías con OpenAI o similar
+    const guion = `Guión generado para: ${tema}. Duración: ${duracion}s. Estilo: ${estilo}.`;
+    
+    res.json({
+        exito: true,
+        guion: guion,
+        tema: tema,
+        duracion: duracion
+    });
 });
 
-app.get('/', (req, res) => {
-  res.json({ 
-    mensaje: '¡Backend funcionando! 🚀',
-    proyecto: 'Editor de Video con IA',
-    fecha: new Date().toLocaleString()
-  });
-});
-
-app.post('/generar-video', (req, res) => {
-  res.json({
-    exito: true,
-    mensaje: '✅ Video generado con éxito!',
-    id: Date.now(),
-    url: 'https://ejemplo.com/video.mp4'
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor funcionando en puerto ${PORT}`);
+// Generar video completo con voz
+app.post('/generar-video-completo', (req, res) => {
+    const { guion, voz, musica, estilo } = req.body;
+    
+    // Aquí integrarías con servicios de voz y video
+    res.json({
+        exito: true,
+        mensaje: 'Video generado con voz y música',
+        url: 'https://ejemplo.com/video-con-voz.mp4',
+        duracion: '60s',
+        voz: voz,
+        musica: musica
+    });
 });
