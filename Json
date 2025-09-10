@@ -1,0 +1,4 @@
+{
+  "guion": "Texto del guión...",
+  "voz": "es_es_male" // o cualquier valor válido según tu lógica
+}
